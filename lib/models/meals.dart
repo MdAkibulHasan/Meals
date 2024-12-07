@@ -28,7 +28,7 @@ class Meal {
   });
 
   final String id;
-  final List<String> categories;
+  final List<int> categories; // Change this to List<int>
   final String title;
   final String imageUrl;
   final List<String> ingredients;

@@ -1,68 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:meals/models/category.dart';
 import 'package:meals/models/meals.dart';
-
-// Constants in Dart should be written in lowerCamelcase.
-const availableCategories = [
-  Category(
-    id: 'c1',
-    title: 'Italian',
-    color: Colors.purple,
-  ),
-  Category(
-    id: 'c2',
-    title: 'Quick & Easy',
-    color: Colors.red,
-  ),
-  Category(
-    id: 'c3',
-    title: 'Hamburgers',
-    color: Colors.orange,
-  ),
-  Category(
-    id: 'c4',
-    title: 'German',
-    color: Colors.amber,
-  ),
-  Category(
-    id: 'c5',
-    title: 'Light & Lovely',
-    color: Colors.blue,
-  ),
-  Category(
-    id: 'c6',
-    title: 'Exotic',
-    color: Colors.green,
-  ),
-  Category(
-    id: 'c7',
-    title: 'Breakfast',
-    color: Colors.lightBlue,
-  ),
-  Category(
-    id: 'c8',
-    title: 'Asian',
-    color: Colors.lightGreen,
-  ),
-  Category(
-    id: 'c9',
-    title: 'French',
-    color: Colors.pink,
-  ),
-  Category(
-    id: 'c10',
-    title: 'Summer',
-    color: Colors.teal,
-  ),
-];
 
 const dummyMeals = [
   Meal(
     id: 'm1',
-    categories: [
-      'c1',
-      'c2',
-    ],
+    categories: [1, 2],
     title: 'Spaghetti with Tomato Sauce',
     affordability: Affordability.affordable,
     complexity: Complexity.simple,
@@ -93,9 +34,7 @@ const dummyMeals = [
   ),
   Meal(
     id: 'm2',
-    categories: [
-      'c2',
-    ],
+    categories: [2],
     title: 'Toast Hawaii',
     affordability: Affordability.affordable,
     complexity: Complexity.simple,
@@ -121,10 +60,7 @@ const dummyMeals = [
   ),
   Meal(
     id: 'm3',
-    categories: [
-      'c2',
-      'c3',
-    ],
+    categories: [2, 3],
     title: 'Classic Hamburger',
     affordability: Affordability.pricey,
     complexity: Complexity.simple,
@@ -153,9 +89,7 @@ const dummyMeals = [
   ),
   Meal(
     id: 'm4',
-    categories: [
-      'c4',
-    ],
+    categories: [4],
     title: 'Wiener Schnitzel',
     affordability: Affordability.luxurious,
     complexity: Complexity.challenging,
@@ -188,11 +122,7 @@ const dummyMeals = [
   ),
   Meal(
     id: 'm5',
-    categories: [
-      'c2'
-          'c5',
-      'c10',
-    ],
+    categories: [2, 5, 10],
     title: 'Salad with Smoked Salmon',
     affordability: Affordability.luxurious,
     complexity: Complexity.simple,
@@ -224,10 +154,7 @@ const dummyMeals = [
   ),
   Meal(
     id: 'm6',
-    categories: [
-      'c6',
-      'c10',
-    ],
+    categories: [6, 10],
     title: 'Delicious Orange Mousse',
     affordability: Affordability.affordable,
     complexity: Complexity.hard,
@@ -260,9 +187,7 @@ const dummyMeals = [
   ),
   Meal(
     id: 'm7',
-    categories: [
-      'c7',
-    ],
+    categories: [7],
     title: 'Pancakes',
     affordability: Affordability.affordable,
     complexity: Complexity.simple,
@@ -291,9 +216,7 @@ const dummyMeals = [
   ),
   Meal(
     id: 'm8',
-    categories: [
-      'c8',
-    ],
+    categories: [8],
     title: 'Creamy Indian Chicken Curry',
     affordability: Affordability.pricey,
     complexity: Complexity.challenging,
@@ -324,9 +247,7 @@ const dummyMeals = [
   ),
   Meal(
     id: 'm9',
-    categories: [
-      'c9',
-    ],
+    categories: [9],
     title: 'Chocolate Souffle',
     affordability: Affordability.affordable,
     complexity: Complexity.hard,
@@ -373,11 +294,7 @@ const dummyMeals = [
   ),
   Meal(
     id: 'm10',
-    categories: [
-      'c2',
-      'c5',
-      'c10',
-    ],
+    categories: [2, 5, 10],
     title: 'Asparagus Salad with Cherry Tomatoes',
     affordability: Affordability.luxurious,
     complexity: Complexity.simple,

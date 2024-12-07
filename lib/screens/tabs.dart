@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:meals/data/dummy_data.dart';
 import 'package:meals/models/meals.dart';
 import 'package:meals/screens/categories.dart';
 import 'package:meals/screens/filters.dart';
 import 'package:meals/screens/meals.dart';
+import 'package:meals/services/meal-service.dart';
 import 'package:meals/widgets/main_drawer.dart';
+
+// enum Filter {
+//   glutenFree,
+//   lactoseFree,
+//   vegetarian,
+//   vegan,
+// }
 
 const kInitialFilters = {
   Filter.glutenFree: false,
@@ -26,13 +33,40 @@ class _TabsScreenState extends State<TabsScreen> {
   int _selectedPageIndex = 0;
   final List<Meal> _favoriteMeals = [];
   Map<Filter, bool> _selectedFilters = kInitialFilters;
+  List<Meal> _availableMeals = [];
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchMeals();
+  }
+
+  Future<void> _fetchMeals() async {
+    try {
+      final meals = await MealsService.fetchMeals();
+      setState(() {
+        _availableMeals = meals;
+        _isLoading = false;
+      });
+    } catch (error) {
+      setState(() {
+        _isLoading = false;
+      });
+      _showErrorMessage('Failed to load meals');
+    }
+  }
+
+  void _showErrorMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
 
   void _showInfoMessage(String message) {
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
+      SnackBar(content: Text(message)),
     );
   }
 
@@ -75,9 +109,8 @@ class _TabsScreenState extends State<TabsScreen> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final availableMeals = dummyMeals.where((meal) {
+  List<Meal> _applyFilters(List<Meal> meals) {
+    return meals.where((meal) {
       if (_selectedFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
         return false;
       }
@@ -92,10 +125,20 @@ class _TabsScreenState extends State<TabsScreen> {
       }
       return true;
     }).toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_isLoading) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    final filteredMeals = _applyFilters(_availableMeals);
 
     Widget activePage = CategoriesScreen(
       onToggleFavorite: _toggleMealFavoriteStatus,
-      availableMeals: availableMeals,
     );
     var activePageTitle = 'Categories';
 
